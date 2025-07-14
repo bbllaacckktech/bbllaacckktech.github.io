@@ -1,99 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>我的学术主页</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      overflow-x: hidden;
-      color: #fff;
-      cursor: crosshair;
-    }
-    .container {
-      padding-top: 50px;
-      position: relative;
-      z-index: 1;
-    }
-    .section {
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的网站</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="mouseEffect"></canvas>
-  <div class="container text-center">
-    <h1 class="my-4">我的学术主页</h1>
-    <p class="lead">欢迎浏览我的学术资料，这里存放我的论文与课件！</p>
-    <div class="row mt-4">
-      <div class="col-md-6 section">
-        <h2>取证</h2>
-        <a href="./pdfs/取证论文1.pdf" target="_blank">📄 取证论文1</a><br>
-        <a href="./pdfs/取证课件1.pdf" target="_blank">📄 取证课件1</a>
-      </div>
-      <div class="col-md-6 section">
-        <h2>信息安全</h2>
-        <a href="./pdfs/信息安全论文1.pdf" target="_blank">📄 信息安全论文1</a><br>
-        <a href="./pdfs/信息安全课件1.pdf" target="_blank">📄 信息安全课件1</a>
-      </div>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>取证</h1>
+        <ul id="forensics-list"></ul>
     </div>
-  </div>
-  <script>
-    const canvas = document.getElementById('mouseEffect');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-
-    function addParticles(x, y, count, maxRadius) {
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: x,
-          y: y,
-          alpha: 1,
-          radius: Math.random() * maxRadius,
-          dx: (Math.random() - 0.5) * 2,
-          dy: (Math.random() - 0.5) * 2
-        });
-      }
-    }
-
-    canvas.addEventListener('mousemove', e => addParticles(e.clientX, e.clientY, 8, 5));
-    canvas.addEventListener('click', e => addParticles(e.clientX, e.clientY, 50, 12));
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles = particles.filter(p => p.alpha > 0);
-      particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-        ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
-        p.alpha -= 0.01;
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-  </script>
+    <div class="container">
+        <h1>信息安全</h1>
+        <ul id="information-security-list"></ul>
+    </div>
+    <div class="container">
+        <h1>大模型</h1>
+        <ul id="large-models-list"></ul>
+    </div>
+    <script src="scripts.js"></script>
 </body>
 </html>
