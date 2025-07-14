@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 获取文件列表的函数
     function fetchFiles(folder, listId) {
-        fetch(`https://api.github.com/repos/<username>/<repo>/contents/${folder}`)
+        fetch(`https://api.github.com/repos/bblaaccktech/bblaaccktech.github.io/contents/${folder}`)
             .then(response => response.json())
             .then(data => {
                 const list = document.getElementById(listId);
+                list.innerHTML = ''; // 清空现有列表
                 if (Array.isArray(data)) {
                     data.forEach(file => {
                         if (file.type === 'file') {
@@ -40,8 +41,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // 获取每个类别的文件
-    fetchFiles('forensics', 'forensics-list');
-    fetchFiles('information-security', 'information-security-list');
-    fetchFiles('large-models', 'large-models-list');
+    // 定期刷新文件列表
+    function refreshFiles() {
+        fetchFiles('forensics', 'forensics-list');
+        fetchFiles('information-security', 'information-security-list');
+        fetchFiles('large-models', 'large-models-list');
+    }
+
+    // 初始加载和每10秒刷新一次
+    refreshFiles();
+    setInterval(refreshFiles, 10000); // 每10秒刷新一次
 });
