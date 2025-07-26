@@ -2,195 +2,171 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>信息安全 - 个人网站</title>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>欢迎回来！</title>
   <style>
+    /* 背景渐变 */
     body {
       margin: 0;
       padding: 0;
-      background-color: #0d1117;
+      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    #particles-js {
+    /* 欢迎容器样式 */
+    .container {
+      max-width: 800px;
+      margin: 100px auto;
+      padding: 2em;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+      text-align: left;
+      color: #fff;
+    }
+
+    .container h1 {
+      color: #00ffcc;
+      font-size: 2.5em;
+    }
+
+    .container p {
+      font-size: 1.2em;
+    }
+
+    /* 下方三个盒子 */
+    .link-section {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      margin: 200px auto;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      max-width: 900px;
+    }
+
+    .link-section.show {
+      opacity: 1;
+    }
+
+    .topic-box {
+      flex: 1;
+      max-width: 240px;
+      padding: 2em;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 255, 128, 0.4);
+      color: #00f7ff;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .topic-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 30px rgba(0, 255, 128, 0.7);
+    }
+
+    /* 鼠标拖尾 canvas */
+    canvas#trail {
       position: fixed;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
-      z-index: -1;
-      background-color: #0d1117;
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 30px;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-      background-color: rgba(13, 17, 23, 0.85);
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0, 255, 128, 0.2);
-    }
-
-    h1, h2 {
-      color: #00ffcc;
-    }
-
-    /* 自定义滚动条 */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1e2126;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #3d7aed;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #2957b9;
-    }
-
-    /* Neumorphism 风格输入框 */
-    .neo-input {
-      position: relative;
-      margin: 20px 0;
-    }
-
-    .neo-input input {
-      background: #0d1117;
-      border: 2px solid #4da6ff;
-      border-radius: 8px;
-      padding: 12px;
-      width: 100%;
-      color: #fff;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-
-    .neo-input label {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      color: #aaa;
-      font-size: 16px;
       pointer-events: none;
-      transition: 0.2s ease all;
-      background-color: #0d1117;
-      padding: 0 4px;
-    }
-
-    .neo-input input:focus,
-    .neo-input input:not(:placeholder-shown) {
-      border-color: #00ffcc;
-    }
-
-    .neo-input input:focus + label,
-    .neo-input input:not(:placeholder-shown) + label {
-      top: -10px;
-      left: 10px;
-      font-size: 12px;
-      color: #00ffcc;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
 
-  <div class="content">
+  <!-- 鼠标拖尾 canvas -->
+  <canvas id="trail"></canvas>
+
+  <!-- 欢迎主容器 -->
+  <div class="container">
     <h1>欢迎回来！</h1>
     <p>你可以在这里找到我的项目、笔记、以及网络安全相关资源。</p>
-
-    <h2>留言板</h2>
-
-    <div class="neo-input">
-      <input type="text" required placeholder=" " />
-      <label>你的昵称</label>
-    </div>
-
-    <div class="neo-input">
-      <input type="email" required placeholder=" " />
-      <label>电子邮箱</label>
-    </div>
-
-    <div class="neo-input">
-      <input type="text" required placeholder=" " />
-      <label>留言内容</label>
-    </div>
   </div>
 
+  <!-- 滚动后出现的三个容器 -->
+  <div class="link-section" id="topics">
+    <a href="pentest.html" class="topic-box">渗透</a>
+    <a href="forensics.html" class="topic-box">取证</a>
+    <a href="ai.html" class="topic-box">大模型</a>
+  </div>
+
+  <!-- 滚动控制显示动画 -->
   <script>
-    particlesJS('particles-js', {
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: "#00ff00"
-        },
-        shape: {
-          type: "circle"
-        },
-        opacity: {
-          value: 0.5,
-          random: true
-        },
-        size: {
-          value: 3,
-          random: true
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00ff00",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: "none",
-          random: true,
-          straight: false,
-          out_mode: "out",
-          bounce: false
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: true,
-            mode: "grab"
-          },
-          onclick: {
-            enable: true,
-            mode: "push"
-          },
-          resize: true
-        },
-        modes: {
-          grab: {
-            distance: 140,
-            line_linked: {
-              opacity: 1
-            }
-          },
-          push: {
-            particles_nb: 4
-          }
-        }
-      },
-      retina_detect: true
+    window.addEventListener('scroll', function () {
+      const section = document.getElementById('topics');
+      const triggerPoint = window.innerHeight * 0.8;
+      if (section.getBoundingClientRect().top < triggerPoint) {
+        section.classList.add('show');
+      }
     });
+  </script>
+
+  <!-- 鼠标拖尾 JS -->
+  <script>
+    const canvas = document.getElementById('trail');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    let particles = [];
+
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      for (let i = 0; i < 3; i++) {
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          radius: Math.random() * 4 + 1,
+          alpha: 1,
+          dx: (Math.random() - 0.5) * 2,
+          dy: (Math.random() - 0.5) * 2,
+          color: `hsl(${Math.random() * 360}, 100%, 70%)`
+        });
+      }
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach((p, index) => {
+        p.x += p.dx;
+        p.y += p.dy;
+        p.alpha -= 0.01;
+        if (p.alpha <= 0) particles.splice(index, 1);
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${hexToRgb(p.color)}, ${p.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    function hexToRgb(h) {
+      let temp = document.createElement("div");
+      temp.style.color = h;
+      document.body.appendChild(temp);
+      const rgb = getComputedStyle(temp).color;
+      document.body.removeChild(temp);
+      return rgb.match(/\d+/g).slice(0, 3).join(',');
+    }
+
+    animate();
   </script>
 </body>
 </html>
