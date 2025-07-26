@@ -1,171 +1,174 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>主页</title> <!-- ✅ 原始 title 保留 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>欢迎回来</title>
   <style>
-    /* ✅ 原背景保留 */
-    body {
+    /* ========== 全局样式 ==========
+    */
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      box-sizing: border-box;
+    }
+    body {
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       overflow-x: hidden;
+      overflow-y: scroll;
     }
 
-    /* 欢迎容器 */
-    .container {
-      max-width: 800px;
-      margin: 100px auto;
-      padding: 2em;
-      background-color: rgba(0, 0, 0, 0.3);
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-      text-align: left;
+    /* 鼠标拖尾 */
+    .trail {
+      position: absolute;
+      height: 8px;
+      width: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fade 0.5s linear forwards;
+    }
+    @keyframes fade {
+      to {
+        opacity: 0;
+        transform: scale(2);
+      }
     }
 
-    .container h1 {
-      color: #00ffff;
-      font-size: 2.5em;
-    }
-
-    .container p {
-      font-size: 1.2em;
-    }
-
-    /* 三个盒子 */
-    .link-section {
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      margin: 200px auto;
-      opacity: 0;
-      transition: opacity 1.5s ease;
-      max-width: 900px;
-    }
-
-    .link-section.show {
-      opacity: 1;
-    }
-
-    .topic-box {
-      flex: 1;
-      max-width: 240px;
-      padding: 2em;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 255, 128, 0.4);
-      color: #00f7ff;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .topic-box:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 30px rgba(0, 255, 128, 0.7);
-    }
-
-    /* 拖尾 canvas */
-    canvas#trail {
+    /* ========== 顶部导航栏 ==========
+    */
+    .navbar {
       position: fixed;
       top: 0;
       left: 0;
-      pointer-events: none;
-      z-index: 9999;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      z-index: 10;
+    }
+    .navbar h1 {
+      font-size: 1.5rem;
+    }
+    .navbar nav a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .navbar nav a:hover {
+      color: #4da6ff;
+    }
+
+    /* ========== 欢迎容器 ==========
+    */
+    .welcome-container {
+      margin-top: 100px;
+      padding: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+    .welcome-container h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .welcome-container p {
+      font-size: 1.1em;
+      color: #ddd;
+    }
+
+    /* ========== 三个模块容器 ==========
+    */
+    .module-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 150px 20px;
+    }
+    .module {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 20px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .module:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .module a {
+      color: #fff;
+      font-size: 1.2em;
+      text-decoration: none;
+    }
+
+    /* ========== 页脚 ==========
+    */
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9em;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
 
-  <!-- 拖尾 Canvas -->
-  <canvas id="trail"></canvas>
-
-  <!-- 欢迎容器 -->
-  <div class="container">
-    <h1>欢迎回来！</h1>
-    <p>你可以在这里找到我的项目、笔记、以及网络安全相关资源。</p>
+  <div class="navbar">
+    <h1>安全实验室</h1>
+    <nav>
+      <a href="#">首页</a>
+      <a href="#">文档</a>
+      <a href="#">关于</a>
+    </nav>
   </div>
 
-  <!-- 滚动出现的三个模块 -->
-  <div class="link-section" id="topics">
-    <a href="pentest.html" class="topic-box">渗透</a>
-    <a href="forensics.html" class="topic-box">取证</a>
-    <a href="ai.html" class="topic-box">大模型</a>
+  <div class="welcome-container">
+    <h2>欢迎回来</h2>
+    <p>你可以在这里开启一次新的探索</p>
   </div>
 
-  <!-- 滚动控制显示 -->
+  <div class="module-section">
+    <div class="module">
+      <a href="penetration.html">渗透测试</a>
+    </div>
+    <div class="module">
+      <a href="forensics.html">取证分析</a>
+    </div>
+    <div class="module">
+      <a href="ai.html">大模型应用</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 安全实验室. 保留所有权利。
+  </footer>
+
   <script>
-    window.addEventListener('scroll', function () {
-      const section = document.getElementById('topics');
-      const triggerPoint = window.innerHeight * 0.8;
-      if (section.getBoundingClientRect().top < triggerPoint) {
-        section.classList.add('show');
-      }
+    document.addEventListener("mousemove", e => {
+      const trail = document.createElement("div");
+      trail.className = "trail";
+      trail.style.left = `${e.pageX}px`;
+      trail.style.top = `${e.pageY}px`;
+      document.body.appendChild(trail);
+      setTimeout(() => trail.remove(), 500);
     });
   </script>
 
-  <!-- 拖尾效果 JS -->
-  <script>
-    const canvas = document.getElementById('trail');
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-
-    let particles = [];
-
-    window.addEventListener('resize', () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      for (let i = 0; i < 3; i++) {
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          radius: Math.random() * 4 + 1,
-          alpha: 1,
-          dx: (Math.random() - 0.5) * 2,
-          dy: (Math.random() - 0.5) * 2,
-          color: `hsl(${Math.random() * 360}, 100%, 70%)`
-        });
-      }
-    });
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach((p, index) => {
-        p.x += p.dx;
-        p.y += p.dy;
-        p.alpha -= 0.01;
-        if (p.alpha <= 0) particles.splice(index, 1);
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${hexToRgb(p.color)}, ${p.alpha})`;
-        ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    function hexToRgb(h) {
-      let temp = document.createElement("div");
-      temp.style.color = h;
-      document.body.appendChild(temp);
-      const rgb = getComputedStyle(temp).color;
-      document.body.removeChild(temp);
-      return rgb.match(/\d+/g).slice(0, 3).join(',');
-    }
-
-    animate();
-  </script>
 </body>
 </html>
