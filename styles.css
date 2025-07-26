@@ -1,61 +1,27 @@
-body {
-    background: linear-gradient(to bottom, #000, #333);
-    color: white;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-    position: relative;
-    overflow: hidden;
+/* 自定义Markdown样式 */
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+    background-color: transparent !important;
 }
 
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
 }
 
-.container {
-    position: relative;
-    z-index: 1;
-    width: 300px;
-    margin: 20px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin: 5px 0;
-}
-
+/* 链接样式 */
 a {
-    color: #fff;
+    color: #4da6ff;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 a:hover {
+    color: #007bff;
     text-decoration: underline;
-}
-
-@keyframes twinkle {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
 }
