@@ -1,4 +1,7 @@
-/* 自定义Markdown样式 */
+/* ===================== */
+/* ✅ Markdown 基础样式  */
+/* ===================== */
+
 .markdown-body {
     box-sizing: border-box;
     min-width: 200px;
@@ -15,13 +18,68 @@
 }
 
 /* 链接样式 */
-a {
+.markdown-body a {
     color: #4da6ff;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-a:hover {
+.markdown-body a:hover {
     color: #007bff;
     text-decoration: underline;
+}
+
+
+/* ===================== */
+/* ✅ Neumorphism 输入框  */
+/* ===================== */
+
+.neo-input {
+    position: relative;
+    margin: 2em auto;
+    width: 100%;
+    max-width: 400px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.neo-input input {
+    width: 100%;
+    padding: 1.2em 0.75em 0.5em;
+    font-size: 1em;
+    border: none;
+    border-radius: 12px;
+    background: #e0e5ec;
+    box-shadow: inset 5px 5px 10px #c6cbd3,
+                inset -5px -5px 10px #f4f9ff;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.neo-input input:focus {
+    outline: none;
+    box-shadow: inset 2px 2px 5px #c3c8ce,
+                inset -2px -2px 5px #f5faff,
+                0 0 0 2px #4a90e2;
+}
+
+.neo-input label {
+    position: absolute;
+    left: 0.75em;
+    top: 1.1em;
+    color: #888;
+    font-size: 1em;
+    pointer-events: none;
+    background: #e0e5ec;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 浮动标签动画逻辑 */
+.neo-input input:focus + label,
+.neo-input input:not(:placeholder-shown):valid + label {
+    top: -0.6em;
+    left: 0.6em;
+    background: #e0e5ec;
+    padding: 0 0.4em;
+    font-size: 0.75em;
+    color: #4a90e2;
 }
