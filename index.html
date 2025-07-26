@@ -3,42 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>欢迎回来</title>
+  <title>我的主页</title>
   <style>
-    /* ========== 全局样式 ==========
-    */
+    /* ========== 全局样式 ========== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(270deg, #0f2027, #203a43, #2c5364);
+      background-size: 600% 600%;
+      animation: moveGradient 15s ease infinite;
       overflow-x: hidden;
       overflow-y: scroll;
     }
 
-    /* 鼠标拖尾 */
+    @keyframes moveGradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* 新鼠标拖尾效果 */
     .trail {
       position: absolute;
-      height: 8px;
-      width: 8px;
-      background: rgba(255, 255, 255, 0.5);
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       pointer-events: none;
-      animation: fade 0.5s linear forwards;
+      background: radial-gradient(circle, #ffffff, #00ffff, #0077ff);
+      opacity: 0.8;
+      filter: blur(2px);
+      animation: trailAnim 0.6s ease-out forwards;
     }
-    @keyframes fade {
-      to {
+
+    @keyframes trailAnim {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
         opacity: 0;
-        transform: scale(2);
+        transform: scale(2.5);
       }
     }
 
-    /* ========== 顶部导航栏 ==========
-    */
+    /* ========== 顶部导航栏 ========== */
     .navbar {
       position: fixed;
       top: 0;
@@ -53,9 +67,11 @@
       padding: 0 40px;
       z-index: 10;
     }
+
     .navbar h1 {
       font-size: 1.5rem;
     }
+
     .navbar nav a {
       margin-left: 20px;
       color: #fff;
@@ -63,12 +79,12 @@
       font-size: 1rem;
       transition: color 0.3s ease;
     }
+
     .navbar nav a:hover {
       color: #4da6ff;
     }
 
-    /* ========== 欢迎容器 ==========
-    */
+    /* ========== 欢迎容器 ========== */
     .welcome-container {
       margin-top: 100px;
       padding: 40px;
@@ -80,17 +96,18 @@
       text-align: center;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
+
     .welcome-container h2 {
       font-size: 2em;
       margin-bottom: 10px;
     }
+
     .welcome-container p {
       font-size: 1.1em;
       color: #ddd;
     }
 
-    /* ========== 三个模块容器 ==========
-    */
+    /* ========== 三个模块容器 ========== */
     .module-section {
       display: flex;
       justify-content: center;
@@ -98,6 +115,7 @@
       gap: 30px;
       margin: 150px 20px;
     }
+
     .module {
       background: rgba(255, 255, 255, 0.1);
       padding: 40px 30px;
@@ -107,30 +125,23 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease, background 0.3s ease;
     }
+
     .module:hover {
       transform: translateY(-10px);
       background: rgba(255, 255, 255, 0.2);
     }
+
     .module a {
       color: #fff;
       font-size: 1.2em;
       text-decoration: none;
-    }
-
-    /* ========== 页脚 ==========
-    */
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 0.9em;
-      color: #ccc;
     }
   </style>
 </head>
 <body>
 
   <div class="navbar">
-    <h1>安全实验室</h1>
+    <h1>BLACK</h1>
     <nav>
       <a href="#">首页</a>
       <a href="#">文档</a>
@@ -140,7 +151,7 @@
 
   <div class="welcome-container">
     <h2>欢迎回来</h2>
-    <p>你可以在这里开启一次新的探索</p>
+    <p>你可以在下面找到相关的资料</p>
   </div>
 
   <div class="module-section">
@@ -155,10 +166,6 @@
     </div>
   </div>
 
-  <footer>
-    &copy; 2025 安全实验室. 保留所有权利。
-  </footer>
-
   <script>
     document.addEventListener("mousemove", e => {
       const trail = document.createElement("div");
@@ -166,7 +173,7 @@
       trail.style.left = `${e.pageX}px`;
       trail.style.top = `${e.pageY}px`;
       document.body.appendChild(trail);
-      setTimeout(() => trail.remove(), 500);
+      setTimeout(() => trail.remove(), 600);
     });
   </script>
 
