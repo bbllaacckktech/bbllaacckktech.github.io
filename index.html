@@ -3,32 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>欢迎回来！</title>
+  <title>主页</title> <!-- ✅ 原始 title 保留 -->
   <style>
-    /* 背景渐变 */
+    /* ✅ 原背景保留 */
     body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
       overflow-x: hidden;
     }
 
-    /* 欢迎容器样式 */
+    /* 欢迎容器 */
     .container {
       max-width: 800px;
       margin: 100px auto;
       padding: 2em;
       background-color: rgba(0, 0, 0, 0.3);
       border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
       text-align: left;
-      color: #fff;
     }
 
     .container h1 {
-      color: #00ffcc;
+      color: #00ffff;
       font-size: 2.5em;
     }
 
@@ -36,7 +35,7 @@
       font-size: 1.2em;
     }
 
-    /* 下方三个盒子 */
+    /* 三个盒子 */
     .link-section {
       display: flex;
       justify-content: center;
@@ -70,7 +69,7 @@
       box-shadow: 0 0 30px rgba(0, 255, 128, 0.7);
     }
 
-    /* 鼠标拖尾 canvas */
+    /* 拖尾 canvas */
     canvas#trail {
       position: fixed;
       top: 0;
@@ -82,23 +81,23 @@
 </head>
 <body>
 
-  <!-- 鼠标拖尾 canvas -->
+  <!-- 拖尾 Canvas -->
   <canvas id="trail"></canvas>
 
-  <!-- 欢迎主容器 -->
+  <!-- 欢迎容器 -->
   <div class="container">
     <h1>欢迎回来！</h1>
     <p>你可以在这里找到我的项目、笔记、以及网络安全相关资源。</p>
   </div>
 
-  <!-- 滚动后出现的三个容器 -->
+  <!-- 滚动出现的三个模块 -->
   <div class="link-section" id="topics">
     <a href="pentest.html" class="topic-box">渗透</a>
     <a href="forensics.html" class="topic-box">取证</a>
     <a href="ai.html" class="topic-box">大模型</a>
   </div>
 
-  <!-- 滚动控制显示动画 -->
+  <!-- 滚动控制显示 -->
   <script>
     window.addEventListener('scroll', function () {
       const section = document.getElementById('topics');
@@ -109,7 +108,7 @@
     });
   </script>
 
-  <!-- 鼠标拖尾 JS -->
+  <!-- 拖尾效果 JS -->
   <script>
     const canvas = document.getElementById('trail');
     const ctx = canvas.getContext('2d');
